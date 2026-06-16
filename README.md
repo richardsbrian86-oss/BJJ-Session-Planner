@@ -40,7 +40,7 @@ Database: (Add your database choice here — MongoDB, Replit DB, etc.)
 
 Integrations: External calendar APIs
 
-CI/CD: GitHub Actions (build workflow included)
+CI/CD: GitHub Actions (build workflow included via `.github/workflows/Bflow.yml`)
 
 📐 Architecture Overview
 Instructor Module — Manage availability and class scheduling
@@ -50,6 +50,45 @@ Student Module — Book sessions and receive confirmations
 Calendar Sync Engine — Prevents overlapping events
 
 Admin Dashboard — View academy‑wide schedule and instructor load
+
+## Testing
+
+This repository now includes a minimal Vitest test setup.
+
+To install dependencies and run the tests:
+
+```bash
+pnpm install
+pnpm test
+```
+
+The test suite covers the basic BJJ session scheduling logic in `src/session-planner.ts`.
+
+## Usage example
+
+Use the session planner helpers to detect conflicts and schedule sessions without overlaps:
+
+```ts
+import { canScheduleSession, scheduleSession, Session } from './src';
+
+const existing: Session[] = [
+  { instructor: 'Coach Lee', start: '09:00', end: '10:00', students: 4 },
+];
+
+const nextSession: Session = {
+  instructor: 'Coach Lee',
+  start: '10:15',
+  end: '11:15',
+  students: 5,
+};
+
+if (canScheduleSession(existing, nextSession)) {
+  const updated = scheduleSession(existing, nextSession);
+  console.log('Scheduled sessions:', updated);
+} else {
+  console.log('Session conflict detected');
+}
+```
 
 👤 Author
 Brian Richards  
