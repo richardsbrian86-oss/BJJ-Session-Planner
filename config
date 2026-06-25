@@ -1,0 +1,209 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "gitsafe-backup"]
+	url = git://gitsafe:5418/backup.git
+	fetch = +refs/heads/*:refs/remotes/gitsafe-backup/*
+	lfsurl = http://gitsafe:5419
+[lfs "http://gitsafe:5419"]
+	locksverify = false
+[remote "subrepl-fyktnro2"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-fyktnro2/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[lfs]
+	repositoryformatversion = 0
+[remote "subrepl-z6rqe82a"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-z6rqe82a/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-wde8vhey"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-wde8vhey/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-5c8vivjt"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-5c8vivjt/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-b3mv4d5n"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-b3mv4d5n/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-xtptkmdo"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-xtptkmdo/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-v7b2oh06"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-v7b2oh06/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-jqvbd5up"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-jqvbd5up/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-cegzizg7"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-cegzizg7/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-1kmwsh9n"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-1kmwsh9n/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-l4mk731b"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-l4mk731b/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-ip882bz8"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-ip882bz8/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-p5z73mva"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-p5z73mva/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-h4u1ow3d"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-h4u1ow3d/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-6uxg3jpc"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-6uxg3jpc/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-4upd1v2z"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-4upd1v2z/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-f5g3v9uh"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-f5g3v9uh/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-qho9g1sw"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-qho9g1sw/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-7d08s7p5"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-7d08s7p5/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-wg5e7dzh"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-wg5e7dzh/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-tzyrvf3d"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-tzyrvf3d/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-q9dyx3ks"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-q9dyx3ks/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-bmczy3s4"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-bmczy3s4/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-ruyulhiy"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-ruyulhiy/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-of261kgq"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-of261kgq/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-w4c06hon"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-w4c06hon/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-c99z57f8"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-c99z57f8/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-lkhr263o"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-lkhr263o/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-5nqt4ig7"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-5nqt4ig7/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-z8491hel"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-z8491hel/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-jz49i15w"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-jz49i15w/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-fxywg4p4"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-fxywg4p4/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-bgezu5bg"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-bgezu5bg/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-tbzg7nwv"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-tbzg7nwv/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-d59oemx8"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-d59oemx8/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-c4pkfk2i"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-c4pkfk2i/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-0kifgj8w"]
+	url = https://github.com/richardsbrian86-oss/Level-Up-Jiujitsu
+	fetch = +refs/heads/*:refs/remotes/subrepl-0kifgj8w/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-llscuzch"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-llscuzch/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-ej8gay2p"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-ej8gay2p/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-9xuzof1n"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-9xuzof1n/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-4zrgki1l"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-4zrgki1l/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-mr700h1r"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-mr700h1r/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-heel29j0"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-heel29j0/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-dzmrou6z"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-dzmrou6z/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-ma6muz97"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-ma6muz97/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-clwm0ldb"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-clwm0ldb/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-bgmq8w2t"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-bgmq8w2t/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-03e8epbn"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-03e8epbn/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
+[remote "subrepl-lj6yhunh"]
+	url = git+ssh://git@ssh.janeway.replit.dev:/home/runner/workspace
+	fetch = +refs/heads/*:refs/remotes/subrepl-lj6yhunh/*
+	lfsurl = ssh://git@ssh.janeway.replit.dev/home/runner/workspace
