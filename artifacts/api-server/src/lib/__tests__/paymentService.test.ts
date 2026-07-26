@@ -7,18 +7,17 @@
  *
  * Run with: pnpm --filter @workspace/api-server test
  */
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { db, sessionsTable } from "@workspace/db";
+import { describe, it, expect, beforeAll, afterAll, afterEach } from "vitest";
+import { db, sessionsTable, instructorsTable } from "@workspace/db";
 import { eq } from "drizzle-orm";
 import { applyPaymentIntentSucceeded, applyInvoicePaid } from "../paymentService";
-
-// Uses instructor that already exists in the dev DB (seeded).
-const TEST_INSTRUCTOR_ID = 6;
 
 // Use unique sentinel values so parallel test runs and real data don't collide.
 const TEST_PI_ID = `pi_test_paymentservice_${Date.now()}`;
 const TEST_SUB_ID = `sub_test_paymentservice_${Date.now()}`;
 
+// Provisioned in beforeAll so the suite works on a fresh database (e.g. CI).
+let testInstructorId: number;
 let testSessionId: number | null = null;
 let testSubSessionId: number | null = null;
 
@@ -29,7 +28,7 @@ async function insertTestSession(overrides: {
   const [row] = await db
     .insert(sessionsTable)
     .values({
-      instructorId: TEST_INSTRUCTOR_ID,
+      instructorId: testInstructorId,
       clientName: "Test Client (webhook integration)",
       date: "2099-01-01",
       time: "10:00",
@@ -53,6 +52,24 @@ async function deleteTestSession(id: number) {
 }
 
 describe("paymentService — DB transitions when Stripe events arrive", () => {
+  beforeAll(async () => {
+    const [row] = await db
+      .insert(instructorsTable)
+      .values({
+        name: "Test Instructor (webhook integration)",
+        slug: `test-paymentservice-${Date.now()}`,
+        pinHash: "test-pin-hash",
+      })
+      .returning({ id: instructorsTable.id });
+    testInstructorId = row.id;
+  });
+
+  afterAll(async () => {
+    await db
+      .delete(instructorsTable)
+      .where(eq(instructorsTable.id, testInstructorId));
+  });
+
   afterEach(async () => {
     if (testSessionId != null) {
       await deleteTestSession(testSessionId);

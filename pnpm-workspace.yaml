@@ -159,6 +159,7 @@ overrides:
   esbuild: "0.27.3"
 
 allowBuilds:
-  dtrace-provider: set this to true or false
-  esbuild: set this to true or false
-  unrs-resolver: set this to true or false
+  # Optional native tracing for bunyan; safe to skip building.
+  dtrace-provider: false
+  esbuild: true
+  unrs-resolver: true

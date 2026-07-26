@@ -81,7 +81,7 @@ export default function BookingConfirmation() {
   });
 
   useEffect(() => {
-    if (!error && !data) return;
+    if (!error && !data) return undefined;
     if (error || !data) {
       document.title = "Booking Not Found — Let's Roll";
       let meta = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
@@ -95,6 +95,7 @@ export default function BookingConfirmation() {
         meta!.content = "index, follow";
       };
     }
+    return undefined;
   }, [data, error]);
 
   if (isLoading) {
