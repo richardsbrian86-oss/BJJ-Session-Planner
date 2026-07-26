@@ -1,0 +1,16 @@
+# Let's Roll — BJJ Instructor Booking Portal
+
+> Let's Roll is a Brazilian Jiu-Jitsu private-session booking platform. Clients can discover certified BJJ instructors, view their services and pricing, and book one-on-one training sessions directly online — no account required.
+
+## Key public pages
+
+- Instructor directory (all available coaches): https://bjj-session-planner.replit.app/book/
+- Individual instructor profiles and booking: https://bjj-session-planner.replit.app/book/{instructor-slug}
+- Book a session with an instructor: https://bjj-session-planner.replit.app/book/{instructor-slug}/book
+- Full sitemap of all instructor pages: https://bjj-session-planner.replit.app/api/public/sitemap.xml
+
+## Notes
+
+- All instructor profile URLs follow the pattern /book/{slug} where {slug} is a unique identifier for each instructor.
+- Booking confirmation and session management pages require a private token and are not intended for indexing.
+- Auth pages (/book/login, /book/signup, etc.) are for client account management and are not useful for AI summarization.
