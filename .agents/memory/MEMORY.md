@@ -1,0 +1,13 @@
+- [Design system — Let's Roll](design-system.md) — orange #f97316 + deep navy #070b14; client portal via CSS vars in index.css, mobile via constants/colors.ts dark block.
+- [Stripe Replit connector wiring](stripe-connector.md) — connector replaces STRIPE_SECRET_KEY env var; publishable key served via /api/public/stripe-key endpoint. Connector binding goes stale; see stripe-secrets-recovery skill.
+- [Stripe secrets recovery skill](../skills/stripe-secrets-recovery/SKILL.md) — diagnose/fix "Stripe not configured" 503s: connector staleness, both-keys requirement, key format validation, restart timing.
+- [Stripe Connect instructor payouts](stripe-connect.md) — each instructor gets an Express account; transfer_data routes payments to their account; subscriptions still go to platform (known gap).
+- [auth_failures schema drift](auth-failures-schema.md) — slug column missing from dev DB after task agent merges; fix with direct SQL ALTER TABLE.
+- [pg-pool resilience skill](../skills/pg-pool-resilience/SKILL.md) — pool.on('error') + process safety nets required; missing handler causes idle-connection crash loops in production.
+- [Vite build env validation skill](../skills/vite-build-env-validation/SKILL.md) — PORT/BASE_PATH checks must skip during `vite build`; use process.argv.includes("build") guard.
+- [Replit Vite production plugins skill](../skills/replit-vite-production-plugins/SKILL.md) — runtimeErrorOverlay() must be dev-only or it ships a feedback modal that blocks mobile UI in production.
+- [Expo CORS fix](expo-cors.md) — Expo web preview origin (*.expo.janeway.replit.dev) differs from REPLIT_DEV_DOMAIN; API needs subdomain wildcard CORS check.
+- [Mobile sync push-on-empty](mobile-sync-push.md) — ServicesContext and SchedulerContext must push local data to backend when API returns empty, not overwrite local with empty response; watch instructorId to re-sync after mid-session migration.
+- [Preview not running — restart steps](preview-restart.md) — all 3 workflows stop from Replit idle timeout; restart in order and verify with logs.
+- [Auth protection layers](auth-protection-layers.md) — IP ban system removed; loginLimiter (10/60s per IP, 429) + isSlugLockedOut (cross-IP per-account via auth_failures) are the two remaining layers; isSlugLockedOut now on all three login endpoints.
+- [Mobile deployment health check](mobile-deployment-health.md) — serve.js needs /healthz + artifact.toml needs [services.production.health.startup]; without both the deployment platform has no fast probe and may treat the 302 redirect on / as unhealthy.

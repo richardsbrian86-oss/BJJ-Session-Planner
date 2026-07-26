@@ -1,0 +1,34 @@
+As Replit Agent, your task is to transform the BJJ Session Planner website (https://bjj-session-planner.replit.app/ ) from its current state, which primarily serves as a placeholder awaiting a 'personal booking link,' into a fully functional, publicly accessible web application. Address all issues and disruptions identified in the recent scan, focusing on creating a complete user experience.
+
+**Key Objectives and Requirements:**
+
+1.  **Public-Facing User Interface (UI):**
+    *   Develop a clear and intuitive public-facing UI that allows general visitors to browse available BJJ training sessions without requiring a prior 'personal booking link.'
+    *   Implement a mechanism for users to discover instructors and view their respective session schedules.
+
+2.  **User Authentication and Management:**
+    *   Create fully functional `/login` and `/signup` pages with robust user registration and authentication flows.
+    *   Ensure secure handling of user credentials and session management.
+
+3.  **Booking Workflow Integration:**
+    *   Design and implement a complete booking process, enabling users to select desired sessions, confirm details, and proceed to payment.
+    *   Integrate the existing Stripe payment gateway (identified by the iframe) seamlessly into the booking and checkout process.
+
+4.  **Clarify 'Personal Booking Link' Functionality:**
+    *   Define and implement how the 'personal booking link' concept will coexist with the new public-facing interface. This could involve:
+        *   Allowing instructors to generate and share direct booking links that bypass the public browsing interface.
+        *   Integrating the personal links as a direct access method for specific instructor schedules within the broader public platform.
+
+5.  **Technical Enhancements:**
+    *   Ensure all navigation paths, including `/login` and `/signup`, render correctly and are fully functional, resolving the current blank page issue.
+    *   Maintain or improve existing SEO and meta-tag configurations.
+    *   Review and either remove the Replit-specific feedback widget if it's not intended for the production application, or integrate it more cohesively into the new design.
+    *   Confirm that no broken assets or client-side errors are introduced during the development process.
+
+**Deliverables:**
+
+*   A fully deployed and functional BJJ Session Planner web application at the provided URL, accessible to both general visitors and users with specific booking links.
+*   Clean, well-documented code for all implemented features.
+*   A brief summary of changes made and how each identified issue was addressed.
+
+Your goal is to provide a comprehensive solution that transforms the current placeholder into a robust and user-friendly BJJ session booking platform.

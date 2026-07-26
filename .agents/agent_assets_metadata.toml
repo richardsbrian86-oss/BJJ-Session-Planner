@@ -1,0 +1,19 @@
+uploads = []
+
+[[generated]]
+id = "pCclMq29MxEUF08SnjrOD"
+uri = "file://artifacts/mobile/assets/images/icon.png"
+type = "image"
+title = "bjj black belt icon"
+
+[[outputs]]
+id = "cNZ16Xirp017QWN1kcG9d"
+uri = "file://marketing/promotional-description.md"
+type = "text"
+title = "Let's Roll — Marketing Copy"
+
+[[outputs]]
+id = "KpVng3hAGkMdMpZ3Hu5wl"
+uri = "file://lets-roll-backend.tar.gz"
+type = "unspecified"
+title = "Let's Roll — Backend Source Code"

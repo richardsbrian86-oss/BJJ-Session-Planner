@@ -1,0 +1,40 @@
+kind = "web"
+previewPath = "/book/"
+title = "Client Booking Portal"
+version = "1.0.0"
+id = "artifacts/client-portal"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/book/" ]
+localPort = 25516
+
+[services.development]
+run = "pnpm --filter @workspace/client-portal run dev"
+
+[services.production]
+
+[services.production.build]
+args = ["pnpm", "--filter", "@workspace/client-portal", "run", "build"]
+
+# Route-aware Node.js server replaces static file serving.
+# serve.mjs validates instructor slugs and booking tokens against the database
+# before serving any HTML, returning real HTTP 404 for unknown resources.
+[services.production.run]
+args = ["node", "artifacts/client-portal/serve.mjs"]
+
+[services.production.run.env]
+PORT = "25516"
+NODE_ENV = "production"
+
+[services.production.health.startup]
+path = "/book/healthz"
+
+[services.env]
+PORT = "25516"
+BASE_PATH = "/book/"
