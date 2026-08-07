@@ -1,0 +1,1079 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: BJJ Training Scheduler API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: instructors
+    description: Instructor registration and auth
+  - name: sessions
+    description: Training session management
+  - name: services
+    description: Service catalog management
+  - name: availability
+    description: Instructor availability management
+  - name: public
+    description: Public instructor profile (no auth required)
+  - name: payments
+    description: Stripe payment operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /instructors/register:
+    post:
+      operationId: registerInstructor
+      tags: [instructors]
+      summary: Register a new instructor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterInstructorRequest"
+      responses:
+        "201":
+          description: Instructor created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstructorAuthResponse"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /instructors/login:
+    post:
+      operationId: loginInstructor
+      tags: [instructors]
+      summary: Login as an instructor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInstructorRequest"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstructorAuthResponse"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /sessions:
+    get:
+      operationId: listSessions
+      tags: [sessions]
+      summary: List all sessions for the authenticated instructor
+      security:
+        - instructorId: []
+      responses:
+        "200":
+          description: List of sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Session"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      operationId: createSession
+      tags: [sessions]
+      summary: Create a new session
+      security:
+        - instructorId: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSessionRequest"
+      responses:
+        "201":
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Session"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /sessions/{id}:
+    patch:
+      operationId: updateSession
+      tags: [sessions]
+      summary: Update a session
+      security:
+        - instructorId: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSessionRequest"
+      responses:
+        "200":
+          description: Session updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Session"
+        "404":
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      operationId: deleteSession
+      tags: [sessions]
+      summary: Delete a session
+      security:
+        - instructorId: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Session deleted
+        "404":
+          description: Session not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /services:
+    get:
+      operationId: listServices
+      tags: [services]
+      summary: List all services for the authenticated instructor
+      security:
+        - instructorId: []
+      responses:
+        "200":
+          description: List of services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Service"
+    post:
+      operationId: createService
+      tags: [services]
+      summary: Create a new service
+      security:
+        - instructorId: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateServiceRequest"
+      responses:
+        "201":
+          description: Service created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Service"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /services/{id}:
+    patch:
+      operationId: updateService
+      tags: [services]
+      summary: Update a service
+      security:
+        - instructorId: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateServiceRequest"
+      responses:
+        "200":
+          description: Service updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Service"
+        "404":
+          description: Service not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      operationId: deleteService
+      tags: [services]
+      summary: Delete a service
+      security:
+        - instructorId: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Service deleted
+        "404":
+          description: Service not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /availability:
+    get:
+      operationId: getAvailability
+      tags: [availability]
+      summary: Get availability for the authenticated instructor
+      security:
+        - instructorId: []
+      responses:
+        "200":
+          description: Availability rows
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Availability"
+    put:
+      operationId: setAvailability
+      tags: [availability]
+      summary: Replace availability for the authenticated instructor
+      security:
+        - instructorId: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetAvailabilityRequest"
+      responses:
+        "200":
+          description: Updated availability
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Availability"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /public/{slug}:
+    get:
+      operationId: getPublicProfile
+      tags: [public]
+      summary: Get public instructor profile by slug
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Public instructor profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicProfileResponse"
+        "404":
+          description: Instructor not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /public/{slug}/create-intent:
+    post:
+      operationId: publicCreatePaymentIntent
+      tags: [public]
+      summary: Create a Stripe PaymentIntent for a client booking (no auth required)
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PublicCreateIntentRequest"
+      responses:
+        "200":
+          description: PaymentIntent created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentIntentResponse"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Instructor not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Stripe not configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /public/{slug}/create-subscription:
+    post:
+      operationId: publicCreateSubscription
+      tags: [public]
+      summary: Create a Stripe subscription for a client booking (no auth required)
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PublicCreateSubscriptionRequest"
+      responses:
+        "200":
+          description: Subscription created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionResponse"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Instructor not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Stripe not configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /public/{slug}/session:
+    post:
+      operationId: publicCreateSession
+      tags: [public]
+      summary: Create a session after successful client payment (no auth required)
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PublicCreateSessionRequest"
+      responses:
+        "201":
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Session"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Instructor not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /payments/create-intent:
+    post:
+      operationId: createPaymentIntent
+      tags: [payments]
+      summary: Create a Stripe PaymentIntent for a session
+      description: >
+        Creates a Stripe PaymentIntent for the specified session and stores the
+        paymentIntentId on the session record. The returned clientSecret is used
+        by the client-side Stripe SDK to present the payment sheet.
+        When Stripe fires payment_intent.succeeded, the session paymentStatus
+        is automatically updated to "paid" via the /payments/webhook endpoint.
+      security:
+        - instructorId: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePaymentIntentRequest"
+      responses:
+        "200":
+          description: PaymentIntent created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentIntentResponse"
+        "400":
+          description: Validation error (missing sessionId, invalid currency, or zero amount)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Missing or invalid instructor token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Session not found or does not belong to this instructor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Stripe is not configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /payments/create-subscription:
+    post:
+      operationId: createSubscription
+      tags: [payments]
+      summary: Create a Stripe recurring subscription for a service
+      description: >
+        Creates a Stripe Customer (or reuses an existing one by email), a recurring
+        Price for the service, and a Subscription with payment_behavior=default_incomplete.
+        The returned clientSecret (from the latest invoice confirmation_secret or
+        pending_setup_intent) is used by the client-side Stripe SDK to confirm payment.
+        When Stripe fires invoice.paid, the session paymentStatus is automatically
+        updated to "paid" via the /payments/webhook endpoint.
+      security:
+        - instructorId: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSubscriptionRequest"
+      responses:
+        "200":
+          description: Subscription created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubscriptionResponse"
+        "400":
+          description: Validation error (missing required fields)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Missing or invalid instructor token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Service or session not found or does not belong to this instructor
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Stripe is not configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /payments/webhook:
+    post:
+      operationId: stripeWebhook
+      tags: [payments]
+      summary: Stripe webhook handler — marks sessions as paid
+      description: >
+        Receives signed Stripe webhook events. The raw request body is verified
+        against the stripe-signature header using STRIPE_WEBHOOK_SECRET before
+        any processing occurs. Handles payment_intent.succeeded (sets
+        paymentStatus=paid by paymentIntentId) and invoice.paid (sets
+        paymentStatus=paid by subscriptionId). All other event types are
+        acknowledged and ignored. Register this URL in the Stripe Dashboard
+        under Developers → Webhooks.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StripeWebhookPayload"
+      responses:
+        "200":
+          description: Webhook received and processed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WebhookAckResponse"
+        "400":
+          description: Missing or invalid stripe-signature header
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Stripe or webhook secret not configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  securitySchemes:
+    instructorId:
+      type: apiKey
+      in: header
+      name: x-instructor-token
+
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    RegisterInstructorRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        pin:
+          type: string
+      required:
+        - name
+        - pin
+
+    LoginInstructorRequest:
+      type: object
+      properties:
+        slug:
+          type: string
+        pin:
+          type: string
+      required:
+        - slug
+        - pin
+
+    InstructorAuthResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        slug:
+          type: string
+        name:
+          type: string
+        token:
+          type: string
+          description: Signed HMAC token for use as x-instructor-token header on authenticated requests
+      required:
+        - id
+        - slug
+        - name
+        - token
+
+    Session:
+      type: object
+      properties:
+        id:
+          type: integer
+        instructorId:
+          type: integer
+        clientName:
+          type: string
+        clientEmail:
+          type: string
+          nullable: true
+        clientPhone:
+          type: string
+          nullable: true
+        date:
+          type: string
+        time:
+          type: string
+        status:
+          type: string
+          enum: [scheduled, completed, cancelled, no_show]
+        serviceName:
+          type: string
+        servicePrice:
+          type: integer
+        packageCount:
+          type: integer
+          nullable: true
+        packageTotal:
+          type: integer
+          nullable: true
+        paymentStatus:
+          type: string
+          enum: [pending, paid, failed, refunded]
+        paymentIntentId:
+          type: string
+          nullable: true
+        subscriptionId:
+          type: string
+          nullable: true
+        calendarEventId:
+          type: string
+          nullable: true
+        notes:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - instructorId
+        - clientName
+        - date
+        - time
+        - status
+        - serviceName
+        - servicePrice
+        - paymentStatus
+        - createdAt
+        - updatedAt
+
+    CreateSessionRequest:
+      type: object
+      properties:
+        clientName:
+          type: string
+        clientEmail:
+          type: string
+        clientPhone:
+          type: string
+        date:
+          type: string
+        time:
+          type: string
+        serviceName:
+          type: string
+        servicePrice:
+          type: integer
+        packageCount:
+          type: integer
+        packageTotal:
+          type: integer
+        notes:
+          type: string
+      required:
+        - clientName
+        - date
+        - time
+        - serviceName
+
+    UpdateSessionRequest:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [scheduled, completed, cancelled, no_show]
+        date:
+          type: string
+        time:
+          type: string
+        clientName:
+          type: string
+        clientEmail:
+          type: string
+        clientPhone:
+          type: string
+        notes:
+          type: string
+        serviceName:
+          type: string
+        servicePrice:
+          type: integer
+        packageCount:
+          type: integer
+        packageTotal:
+          type: integer
+        paymentStatus:
+          type: string
+          enum: [pending, paid, failed, refunded]
+        paymentIntentId:
+          type: string
+        calendarEventId:
+          type: string
+
+    Service:
+      type: object
+      properties:
+        id:
+          type: integer
+        instructorId:
+          type: integer
+        name:
+          type: string
+        price:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - instructorId
+        - name
+        - price
+        - createdAt
+
+    CreateServiceRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+      required:
+        - name
+        - price
+
+    UpdateServiceRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: integer
+
+    Availability:
+      type: object
+      properties:
+        id:
+          type: integer
+        instructorId:
+          type: integer
+        day:
+          type: string
+        enabled:
+          type: boolean
+        startTime:
+          type: string
+        endTime:
+          type: string
+        sessionDurationMinutes:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - instructorId
+        - day
+        - enabled
+        - startTime
+        - endTime
+        - sessionDurationMinutes
+        - createdAt
+
+    AvailabilityInput:
+      type: object
+      properties:
+        day:
+          type: string
+        enabled:
+          type: boolean
+        startTime:
+          type: string
+        endTime:
+          type: string
+        sessionDurationMinutes:
+          type: integer
+      required:
+        - day
+        - enabled
+        - startTime
+        - endTime
+        - sessionDurationMinutes
+
+    SetAvailabilityRequest:
+      type: object
+      properties:
+        availability:
+          type: array
+          items:
+            $ref: "#/components/schemas/AvailabilityInput"
+      required:
+        - availability
+
+    PublicInstructor:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+      required:
+        - id
+        - name
+        - slug
+
+    PublicProfileResponse:
+      type: object
+      properties:
+        instructor:
+          $ref: "#/components/schemas/PublicInstructor"
+        services:
+          type: array
+          items:
+            $ref: "#/components/schemas/Service"
+        availability:
+          type: array
+          items:
+            $ref: "#/components/schemas/Availability"
+      required:
+        - instructor
+        - services
+        - availability
+
+    CreatePaymentIntentRequest:
+      type: object
+      properties:
+        sessionId:
+          type: integer
+          description: Session ID to charge. Amount is computed server-side from servicePrice or packageTotal (20% discount applied to packages).
+        currency:
+          type: string
+          default: usd
+      required:
+        - sessionId
+
+    PaymentIntentResponse:
+      type: object
+      properties:
+        clientSecret:
+          type: string
+          nullable: true
+        id:
+          type: string
+      required:
+        - id
+
+    CreateSubscriptionRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Client email address for the Stripe customer
+        serviceId:
+          type: integer
+          description: Service ID to bill. Price and name are looked up server-side.
+        sessionId:
+          type: integer
+          description: Session to associate with this subscription for automatic payment tracking.
+        interval:
+          type: string
+          enum: [weekly, monthly]
+          default: monthly
+      required:
+        - email
+        - serviceId
+        - sessionId
+
+    SubscriptionResponse:
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+        clientSecret:
+          type: string
+          nullable: true
+      required:
+        - subscriptionId
+
+    StripeWebhookPayload:
+      type: object
+      properties:
+        type:
+          type: string
+        data:
+          type: object
+      required:
+        - type
+
+    WebhookAckResponse:
+      type: object
+      properties:
+        received:
+          type: boolean
+      required:
+        - received
+
+    PublicCreateIntentRequest:
+      type: object
+      properties:
+        serviceId:
+          type: integer
+          description: ID of the service to book
+        packageCount:
+          type: integer
+          description: Number of sessions in the package (1, 4, 6, 8, or 10)
+          default: 1
+        clientName:
+          type: string
+      required:
+        - serviceId
+        - clientName
+
+    PublicCreateSubscriptionRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Client email for Stripe customer
+        serviceId:
+          type: integer
+          description: ID of the service to subscribe to
+        packageCount:
+          type: integer
+          description: Number of sessions per billing interval
+          default: 1
+        interval:
+          type: string
+          enum: [weekly, monthly]
+          default: monthly
+      required:
+        - email
+        - serviceId
+
+    PublicCreateSessionRequest:
+      type: object
+      properties:
+        clientName:
+          type: string
+        clientEmail:
+          type: string
+        clientPhone:
+          type: string
+        date:
+          type: string
+        time:
+          type: string
+        paymentIntentId:
+          type: string
+        subscriptionId:
+          type: string
+        notes:
+          type: string
+      required:
+        - clientName
+        - date
+        - time

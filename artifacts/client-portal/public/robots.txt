@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bjj-session-planner.replit.app/api/public/sitemap.xml
