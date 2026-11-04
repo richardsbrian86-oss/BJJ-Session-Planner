@@ -89,7 +89,7 @@ Running the tests:
 
 ```bash
 pnpm install
-pnpm test
+pnpm test   # runs the API server suite; needs DATABASE_URL pointing at a disposable Postgres
 ```
 
 Example of the logic being tested:
@@ -126,7 +126,7 @@ if (canScheduleSession(existing, nextSession)) {
 | Backend | Node.js | Fits well with JavaScript across the stack; easy to iterate quickly |
 | Database | MongoDB / Replit DB | Flexible document model suits session and availability data |
 | Calendar | External calendar APIs | Leverage what already exists rather than rebuilding it |
-| CI/CD | GitHub Actions | Automated checks on every push via `.github/workflows/Bflow.yml` |
+| CI/CD | GitHub Actions | Automated checks on every push via `.github/workflows/ci.yml` |
 | Platform | Replit | End-to-end: development, AI assistance, custom Skills, and deployment |
 
 ---

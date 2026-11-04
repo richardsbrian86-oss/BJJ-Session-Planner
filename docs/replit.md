@@ -234,4 +234,5 @@ Stripe credentials are managed by the **Replit Stripe connector** — do NOT set
 - Client portal is served as a **static build** from `artifacts/client-portal/dist/public/`
 - Mobile app runs a lightweight Express serve script in production
 - After merging task-agent branches, always run `pnpm --filter @workspace/db run push` — task agents sometimes apply schema changes via raw SQL that miss the dev DB
+- `push-force` (non-interactive, may drop data) is for the ephemeral CI database only; use `push` for dev and post-merge
 - `auth_failures` table requires columns: `ip`, `count`, `window_start`, `alerted_at`, `slug` — and a UNIQUE constraint on `(slug, ip)`
