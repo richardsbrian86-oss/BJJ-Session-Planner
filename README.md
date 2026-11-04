@@ -79,41 +79,14 @@ Keeping these separate meant I could reason about each piece independently and t
 
 ---
 
-## ✅ How I Approached Testing
+## ✅ CI Checks
 
-I didn't want tests just for the sake of having them. The core logic I most wanted to protect was the conflict detection — if that breaks, double-bookings happen, and the whole point of the app falls apart.
+GitHub Actions runs on pushes and pull requests targeting `main`, and can also be started manually. The workflow typechecks workspace libraries and packages (excluding the mobile package), pushes the database schema to a temporary PostgreSQL service, and runs the API server tests. The mobile package remains excluded because its typecheck and Jest setup have known issues.
 
-So I started there. The test suite focuses on the scheduling logic: can the system correctly identify when a new session overlaps with an existing one, and refuse to book it?
-
-Running the tests:
+Run the API server tests locally with:
 
 ```bash
-pnpm install
-pnpm test
-```
-
-Example of the logic being tested:
-
-```ts
-import { canScheduleSession, scheduleSession, Session } from './src';
-
-const existing: Session[] = [
-  { instructor: 'Coach Lee', start: '09:00', end: '10:00', students: 4 },
-];
-
-const nextSession: Session = {
-  instructor: 'Coach Lee',
-  start: '10:15',
-  end: '11:15',
-  students: 5,
-};
-
-if (canScheduleSession(existing, nextSession)) {
-  const updated = scheduleSession(existing, nextSession);
-  console.log('Scheduled sessions:', updated);
-} else {
-  console.log('Session conflict detected');
-}
+pnpm --filter @workspace/api-server run test
 ```
 
 ---
@@ -126,7 +99,7 @@ if (canScheduleSession(existing, nextSession)) {
 | Backend | Node.js | Fits well with JavaScript across the stack; easy to iterate quickly |
 | Database | MongoDB / Replit DB | Flexible document model suits session and availability data |
 | Calendar | External calendar APIs | Leverage what already exists rather than rebuilding it |
-| CI/CD | GitHub Actions | Automated checks on every push via `.github/workflows/Bflow.yml` |
+| CI/CD | GitHub Actions | Automated checks on pushes and pull requests targeting `main` via `.github/workflows/ci.yml` |
 | Platform | Replit | End-to-end: development, AI assistance, custom Skills, and deployment |
 
 ---

@@ -7,6 +7,9 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -33,7 +36,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install pnpm
-        run: corepack enable && corepack prepare pnpm@latest --activate
+        run: corepack enable && corepack prepare pnpm@12.16.1 --activate
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -42,7 +45,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       # The Expo mobile app has pre-existing type errors and a broken jest
       # setup inherited from the Replit workspace; typecheck everything else.
